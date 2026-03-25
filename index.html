@@ -3,181 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond the Books | Support Our Libraries</title>
+    <title>Beyond the Books | Support Nova Scotia Libraries</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        .wordmark-font {
-            font-family: 'Permanent+Marker', cursive;
-        }
         body {
             font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
         }
-        .carousel-item {
-            display: none;
-            transition: opacity 1s ease-in-out;
+
+        /* Hero & Carousel logic */
+        .hero-container {
+            position: relative;
+            height: 90vh;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
         }
-        .carousel-item.active {
-            display: block;
+
+        .bg-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translateX(100%);
+            transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+            filter: brightness(0.4);
+            z-index: 1;
+        }
+
+        .bg-slide.active {
+            transform: translateX(0);
+            z-index: 2;
+        }
+
+        /* The stationary elements */
+        .stationary-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            pointer-events: none;
+        }
+
+        .stationary-overlay * {
+            pointer-events: auto;
+        }
+
+        /* The dynamic word logic */
+        .word-container {
+            height: 1.2em;
+            overflow: hidden;
+            position: relative;
+            display: inline-block;
+            vertical-align: bottom;
+            width: 100%;
+        }
+
+        .dynamic-word {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            color: #3b82f6;
+        }
+
+        .dynamic-word.active {
+            transform: translateX(0);
             opacity: 1;
         }
-        .fade-in {
-            animation: fadeIn 1.5s ease-in;
+
+        .brand-logo {
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            line-height: 0.8;
+            letter-spacing: -0.05em;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .brand-sub {
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            border-top: 1px solid currentColor;
+            padding-top: 2px;
+            display: block;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+<body class="bg-white text-slate-900">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <nav class="fixed w-full z-[100] bg-white/90 backdrop-blur-md border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex flex-col">
-                <span class="text-2xl font-black tracking-tighter italic uppercase">BEYOND</span>
-                <span class="text-xs font-semibold tracking-widest uppercase -mt-1 border-t border-black pt-0.5">the books</span>
+            <div class="flex flex-col brand-logo text-2xl">
+                BEYOND
+                <span class="brand-sub">the books</span>
             </div>
-            <div class="hidden md:flex space-x-8 font-medium uppercase text-sm tracking-widest">
-                <a href="#about" class="hover:text-blue-600 transition">Our Impact</a>
-                <a href="#threat" class="hover:text-red-600 transition">The Crisis</a>
-                <a href="#help" class="bg-black text-white px-4 py-2 rounded hover:bg-blue-700 transition">Take Action</a>
+            <div class="hidden md:flex space-x-10 font-bold uppercase text-[10px] tracking-[0.2em]">
+                <a href="#about" class="hover:text-blue-600 transition">Province Impact</a>
+                <a href="#threat" class="hover:text-red-600 transition text-red-500">The Funding Crisis</a>
+                <a href="#threat" class="bg-black text-white px-5 py-2 rounded-full hover:bg-blue-600 transition">Support NS Libraries</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Carousel -->
-    <section class="relative h-screen w-full bg-black overflow-hidden">
-        <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/40 z-10 flex items-center justify-center text-center px-4">
-            <div class="fade-in">
-                <h1 class="text-white text-4xl md:text-7xl font-light tracking-tight mb-2">
-                    Libraries Are <br>
-                    <span id="carousel-word" class="font-black italic uppercase text-blue-400 text-5xl md:text-8xl">Community</span>
-                </h1>
-                <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mt-6">
-                    Our local libraries are at a crossroads. With significant budget cuts looming, we risk losing the heart of our community.
+    <!-- Hero Section -->
+    <section class="hero-container">
+        <!-- Sliding Backgrounds -->
+        <div id="image-track">
+            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2000&auto=format&fit=crop" class="bg-slide active" alt="Community Support">
+            <img src="https://images.unsplash.com/photo-1507733432356-86e8bbff329b?q=80&w=2000&auto=format&fit=crop" class="bg-slide" alt="Digital Access">
+            <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2000&auto=format&fit=crop" class="bg-slide" alt="Youth Potential">
+            <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?q=80&w=2000&auto=format&fit=crop" class="bg-slide" alt="Inclusive Spaces">
+        </div>
+
+        <!-- Stationary Content Overlay -->
+        <div class="stationary-overlay px-6">
+            <div class="max-w-4xl w-full">
+                <h2 class="text-4xl md:text-7xl font-light mb-2 tracking-tight">Libraries Are</h2>
+                
+                <div class="word-container text-5xl md:text-8xl mb-8">
+                    <span class="dynamic-word active">Community</span>
+                    <span class="dynamic-word">Essential</span>
+                    <span class="dynamic-word">Opportunity</span>
+                    <span class="dynamic-word">Safe Spaces</span>
+                </div>
+
+                <p class="text-white/80 text-lg md:text-xl max-w-xl mx-auto mb-10 font-light leading-relaxed">
+                    Across Nova Scotia, our public libraries provide the vital services that build a healthy, connected, and resilient province.
                 </p>
-                <div class="mt-10">
-                    <a href="#about" class="border-2 border-white text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">See Our Impact</a>
+
+                <div class="flex justify-center">
+                    <a href="#threat" class="bg-blue-600 hover:bg-white hover:text-blue-600 text-white px-10 py-4 rounded-full font-black uppercase tracking-[0.2em] text-sm transition-all shadow-2xl">
+                        Protect Our Libraries
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Carousel Images -->
-        <div id="carousel-images" class="h-full w-full">
-            <div class="carousel-item active h-full w-full">
-                <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=2000" class="object-cover h-full w-full opacity-60" alt="Library community">
-            </div>
-            <div class="carousel-item h-full w-full">
-                <img src="https://images.unsplash.com/photo-1529148482759-b35b25c5f217?auto=format&fit=crop&q=80&w=2000" class="object-cover h-full w-full opacity-60" alt="Library technology">
-            </div>
-            <div class="carousel-item h-full w-full">
-                <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=2000" class="object-cover h-full w-full opacity-60" alt="Library safe space">
-            </div>
-            <div class="carousel-item h-full w-full">
-                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=2000" class="object-cover h-full w-full opacity-60" alt="Library youth programming">
-            </div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-white/10 z-[60]">
+            <div id="progress-bar" class="h-full bg-blue-500 transition-all duration-[4000ms] ease-linear" style="width: 0%"></div>
         </div>
     </section>
 
-    <!-- Impact Section -->
-    <section id="about" class="py-24 px-6 bg-white">
-        <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-blue-600 mb-4">The Mission</h2>
-            <h3 class="text-4xl md:text-5xl font-black mb-16 italic uppercase">Beyond the Books</h3>
-            
-            <div class="grid md:grid-cols-3 gap-12">
-                <!-- Safe Spaces -->
-                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2">
-                    <div class="mb-6 inline-block p-4 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
+    <!-- Detailed Impact -->
+    <section id="about" class="py-24 px-6 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold tracking-widest uppercase mb-6">
+                        Nova Scotia Public Library Advocacy
                     </div>
-                    <h4 class="text-xl font-bold mb-4 uppercase italic">Safe Spaces</h4>
-                    <p class="text-slate-600 leading-relaxed">Providing a warm, welcoming environment for everyone in our community, offering access to heat, power, and connection.</p>
+                    <h3 class="text-5xl font-black italic uppercase tracking-tighter mb-8 leading-none">
+                        Essential to<br><span class="text-blue-600">Every Nova Scotian.</span>
+                    </h3>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8">
+                        Our provincial library system is more than a collection of buildings; it is a critical piece of social infrastructure. We provide free access to technology, health resources, career support, and safe community hubs for everyone from Sydney to Yarmouth.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-200/50">
+                            <span class="block text-2xl font-black text-blue-600 mb-2">9 Regional Systems</span>
+                            <p class="text-xs text-slate-500 uppercase font-bold tracking-wider">Provincial Reach</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-200/50">
+                            <span class="block text-2xl font-black text-blue-600 mb-2">80+ Branches</span>
+                            <p class="text-xs text-slate-500 uppercase font-bold tracking-wider">Local Connection</p>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Youth Programming -->
-                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2">
-                    <div class="mb-6 inline-block p-4 bg-purple-50 text-purple-600 rounded-xl group-hover:bg-purple-600 group-hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
+                <div class="order-1 lg:order-2">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-blue-600/10 rounded-[3rem] -rotate-3"></div>
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=1200&auto=format&fit=crop" class="relative z-10 w-full aspect-square object-cover rounded-[2.5rem] shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000" alt="Nova Scotia Library Life">
                     </div>
-                    <h4 class="text-xl font-bold mb-4 uppercase italic">Youth Programming</h4>
-                    <p class="text-slate-600 leading-relaxed">Fostering creativity and literacy in the next generation through coding clubs, summer reading programs, and 3D printing workshops.</p>
-                </div>
-
-                <!-- Community Outreach -->
-                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2">
-                    <div class="mb-6 inline-block p-4 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-600 group-hover:text-white transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-bold mb-4 uppercase italic">Community Outreach</h4>
-                    <p class="text-slate-600 leading-relaxed">Reaching rural areas through mobile services, government access support, and the Library of Things.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Crisis Banner -->
-    <section id="threat" class="bg-red-600 py-16 text-white text-center">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-3xl md:text-5xl font-black uppercase italic mb-6">Our Libraries are in Danger</h2>
-            <p class="text-xl opacity-90 mb-8 leading-relaxed">
-                Significant provincial budget cuts are threatening the very programs that make Nova Scotia libraries essential. We need your voice to ensure "Beyond the Books" remains a reality.
+    <!-- Call to Action / Crisis -->
+    <section id="threat" class="bg-black py-24 px-6 text-white text-center overflow-hidden relative">
+        <div class="absolute top-0 left-0 w-full h-full bg-red-600 opacity-10 pointer-events-none"></div>
+        <div class="max-w-3xl mx-auto relative z-10">
+            <h2 class="text-5xl md:text-7xl font-black uppercase italic mb-8 tracking-tighter">Budget Cuts Hurt Everyone.</h2>
+            <p class="text-xl opacity-70 mb-12 font-light">
+                Nova Scotia's library funding is at a critical tipping point. These cuts threaten hours of operation, digital collections, and community outreach. Your voice can change the story.
             </p>
-            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-                <a href="https://www.parl.ns.ca" target="_blank" class="bg-white text-red-600 px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-black hover:text-white transition">Visit PARL</a>
+            <div class="flex flex-col md:flex-row gap-6 justify-center">
+                <a href="#" class="bg-blue-600 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all transform hover:scale-105 shadow-xl">
+                    Contact Your Rep
+                </a>
+                <a href="https://nsla.ns.ca/" target="_blank" class="border border-white/30 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
+                    Learn More (NSLA)
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="help" class="bg-slate-900 py-12 px-6 text-white/50 text-sm">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-8 md:mb-0 text-center md:text-left">
-                <div class="text-white flex flex-col mb-4">
-                    <span class="text-3xl font-black tracking-tighter italic uppercase leading-none">BEYOND</span>
-                    <span class="text-xs font-semibold tracking-[0.3em] uppercase border-t border-white/20 pt-1">the books</span>
-                </div>
-                <p>© 2026 Student Design Project. Advocating for PARL.</p>
+    <!-- Minimal Footer -->
+    <footer class="bg-white py-16 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col items-center">
+            <div class="flex flex-col brand-logo text-3xl mb-12">
+                BEYOND
+                <span class="brand-sub">the books</span>
             </div>
-            <div class="flex space-x-8 uppercase tracking-widest font-bold text-white">
-                <a href="https://www.parl.ns.ca" target="_blank" class="hover:text-blue-400 transition">Pictou-Antigonish Library</a>
-                <a href="#" class="hover:text-blue-400 transition">Contact Reps</a>
+            <div class="w-full h-px bg-slate-100 mb-12"></div>
+            <div class="flex flex-wrap justify-center gap-10 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+                <a href="#" class="hover:text-black transition">Advocacy Kit</a>
+                <a href="#" class="hover:text-black transition">Impact Report</a>
+                <a href="#" class="hover:text-black transition">Find Your Branch</a>
+                <a href="#" class="hover:text-black transition">Contact MLA</a>
             </div>
+            <p class="mt-12 text-[10px] text-slate-300 font-bold uppercase tracking-widest">
+                Art 115 Final Project • Nova Scotia Library Advocacy • 2026
+            </p>
         </div>
     </footer>
 
     <script>
-        const words = ["Community", "Social", "Essential", "Safe Spaces", "Progress"];
-        const wordElement = document.getElementById('carousel-word');
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        let index = 0;
+        const slides = document.querySelectorAll('.bg-slide');
+        const dynamicWords = document.querySelectorAll('.dynamic-word');
+        const progressBar = document.getElementById('progress-bar');
+        
+        let current = 0;
+        const total = slides.length;
+        const interval = 4000;
 
-        function rotateCarousel() {
-            // Update text
-            index = (index + 1) % words.length;
-            wordElement.classList.add('opacity-0');
+        function updateCarousel() {
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
+            void progressBar.offsetWidth;
             
-            setTimeout(() => {
-                wordElement.innerText = words[index];
-                wordElement.classList.remove('opacity-0');
-                wordElement.classList.add('fade-in');
-            }, 500);
+            const next = (current + 1) % total;
 
-            // Update image
-            carouselItems.forEach(item => item.classList.remove('active'));
-            carouselItems[index % carouselItems.length].classList.add('active');
+            slides[current].classList.remove('active');
+            slides[next].classList.add('active');
+
+            dynamicWords[current].classList.remove('active');
+            dynamicWords[next].classList.add('active');
+
+            current = next;
+
+            progressBar.style.transition = `width ${interval}ms linear`;
+            progressBar.style.width = '100%';
         }
 
-        setInterval(rotateCarousel, 4000);
+        setTimeout(() => {
+            progressBar.style.transition = `width ${interval}ms linear`;
+            progressBar.style.width = '100%';
+        }, 50);
+
+        setInterval(updateCarousel, interval);
     </script>
 </body>
 </html>
