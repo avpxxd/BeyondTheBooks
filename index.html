@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond the Books | Support Our Libraries</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .wordmark-font {
+            font-family: 'Permanent+Marker', cursive;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .carousel-item {
+            display: none;
+            transition: opacity 1s ease-in-out;
+        }
+        .carousel-item.active {
+            display: block;
+            opacity: 1;
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex flex-col">
+                <span class="text-2xl font-black tracking-tighter italic uppercase">BEYOND</span>
+                <span class="text-xs font-semibold tracking-widest uppercase -mt-1 border-t border-black pt-0.5">the books</span>
+            </div>
+            <div class="hidden md:flex space-x-8 font-medium uppercase text-sm tracking-widest">
+                <a href="#about" class="hover:text-blue-600 transition">Our Impact</a>
+                <a href="#threat" class="hover:text-red-600 transition">The Crisis</a>
+                <a href="#help" class="bg-black text-white px-4 py-2 rounded hover:bg-blue-700 transition">Take Action</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Carousel -->
+    <section class="relative h-screen w-full bg-black overflow-hidden">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/40 z-10 flex items-center justify-center text-center px-4">
+            <div class="fade-in">
+                <h1 class="text-white text-4xl md:text-7xl font-light tracking-tight mb-2">
+                    Libraries Are <br>
+                    <span id="carousel-word" class="font-black italic uppercase text-blue-400 text-5xl md:text-8xl">Community</span>
+                </h1>
+                <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto mt-6">
+                    Our local libraries are at a crossroads. With significant budget cuts looming, we risk losing the heart of our community.
+                </p>
+                <div class="mt-10">
+                    <a href="#about" class="border-2 border-white text-white px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">See Our Impact</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Images -->
+        <div id="carousel-images" class="h-full w-full">
+            <div class="carousel-item active h-full w-full">
+                <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=2000" class="object-cover h-full w-full opacity-60" alt="Library community">
+            </div>
+            <div class="carousel-item h-full w-full">
+                <img src="https://images.unsplash.com/photo-1529148482759-b35b25c5f217?auto=format&fit=crop&q=80&w=2000" class="object-cover h-full w-full opacity-60" alt="Library technology">
+            </div>
+            <div class="carousel-item h-full w-full">
+                <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=2000" class="object-cover h-full w-full opacity-60" alt="Library safe space">
+            </div>
+            <div class="carousel-item h-full w-full">
+                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=2000" class="object-cover h-full w-full opacity-60" alt="Library youth programming">
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="about" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-xs font-bold tracking-[0.3em] uppercase text-blue-600 mb-4">The Mission</h2>
+            <h3 class="text-4xl md:text-5xl font-black mb-16 italic uppercase">Beyond the Books</h3>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Safe Spaces -->
+                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2">
+                    <div class="mb-6 inline-block p-4 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 uppercase italic">Safe Spaces</h4>
+                    <p class="text-slate-600 leading-relaxed">Providing a warm, welcoming environment for everyone in our community, offering access to heat, power, and connection.</p>
+                </div>
+
+                <!-- Youth Programming -->
+                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2">
+                    <div class="mb-6 inline-block p-4 bg-purple-50 text-purple-600 rounded-xl group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 uppercase italic">Youth Programming</h4>
+                    <p class="text-slate-600 leading-relaxed">Fostering creativity and literacy in the next generation through coding clubs, summer reading programs, and 3D printing workshops.</p>
+                </div>
+
+                <!-- Community Outreach -->
+                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-xl transition-all hover:-translate-y-2">
+                    <div class="mb-6 inline-block p-4 bg-green-50 text-green-600 rounded-xl group-hover:bg-green-600 group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4 uppercase italic">Community Outreach</h4>
+                    <p class="text-slate-600 leading-relaxed">Reaching rural areas through mobile services, government access support, and the Library of Things.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crisis Banner -->
+    <section id="threat" class="bg-red-600 py-16 text-white text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl md:text-5xl font-black uppercase italic mb-6">Our Libraries are in Danger</h2>
+            <p class="text-xl opacity-90 mb-8 leading-relaxed">
+                Significant provincial budget cuts are threatening the very programs that make Nova Scotia libraries essential. We need your voice to ensure "Beyond the Books" remains a reality.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
+                <a href="https://www.parl.ns.ca" target="_blank" class="bg-white text-red-600 px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-black hover:text-white transition">Visit PARL</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="help" class="bg-slate-900 py-12 px-6 text-white/50 text-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0 text-center md:text-left">
+                <div class="text-white flex flex-col mb-4">
+                    <span class="text-3xl font-black tracking-tighter italic uppercase leading-none">BEYOND</span>
+                    <span class="text-xs font-semibold tracking-[0.3em] uppercase border-t border-white/20 pt-1">the books</span>
+                </div>
+                <p>© 2026 Student Design Project. Advocating for PARL.</p>
+            </div>
+            <div class="flex space-x-8 uppercase tracking-widest font-bold text-white">
+                <a href="https://www.parl.ns.ca" target="_blank" class="hover:text-blue-400 transition">Pictou-Antigonish Library</a>
+                <a href="#" class="hover:text-blue-400 transition">Contact Reps</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const words = ["Community", "Social", "Essential", "Safe Spaces", "Progress"];
+        const wordElement = document.getElementById('carousel-word');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        let index = 0;
+
+        function rotateCarousel() {
+            // Update text
+            index = (index + 1) % words.length;
+            wordElement.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                wordElement.innerText = words[index];
+                wordElement.classList.remove('opacity-0');
+                wordElement.classList.add('fade-in');
+            }, 500);
+
+            // Update image
+            carouselItems.forEach(item => item.classList.remove('active'));
+            carouselItems[index % carouselItems.length].classList.add('active');
+        }
+
+        setInterval(rotateCarousel, 4000);
+    </script>
+</body>
+</html>
