@@ -100,21 +100,65 @@
             padding-top: 2px;
             display: block;
         }
+
+        /* Navbar active states */
+        .nav-scrolled {
+            box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1);
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+        }
+
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
 </head>
 <body class="bg-white text-slate-900">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-[100] bg-white/90 backdrop-blur-md border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex flex-col brand-logo text-2xl">
+    <nav id="navbar" class="fixed w-full z-[100] bg-white/95 backdrop-blur-md border-b border-slate-100 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex flex-col brand-logo text-2xl hover:text-blue-600 transition-colors">
                 BEYOND
                 <span class="brand-sub">the books</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center space-x-10">
+                <a href="#about" class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-500 hover:text-black transition-colors relative group">
+                    Province Impact
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="#threat" class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-500 hover:text-black transition-colors relative group">
+                    The Funding Crisis
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
+                </a>
+                <a href="https://enstools.electionsnovascotia.ca/edinfo/" target="_blank" class="bg-black text-white px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] hover:bg-blue-600 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-black/10">
+                    Support NS Libraries
+                </a>
             </div>
-            <div class="hidden md:flex space-x-10 font-bold uppercase text-[10px] tracking-[0.2em]">
-                <a href="#about" class="hover:text-blue-600 transition">Province Impact</a>
-                <a href="#threat" class="hover:text-red-600 transition text-red-500">The Funding Crisis</a>
-                <a href="#threat" class="bg-black text-white px-5 py-2 rounded-full hover:bg-blue-600 transition">Support NS Libraries</a>
+
+            <!-- Mobile Toggle -->
+            <button id="menu-toggle" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none">
+                <span id="bar1" class="w-6 h-0.5 bg-black transition-all"></span>
+                <span id="bar2" class="w-6 h-0.5 bg-black transition-all"></span>
+                <span id="bar3" class="w-6 h-0.5 bg-black transition-all"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 top-[72px] bg-white z-[90] md:hidden translate-x-full">
+            <div class="flex flex-col p-8 space-y-8 h-full">
+                <a href="#about" class="mobile-link text-3xl font-black italic uppercase tracking-tighter hover:text-blue-600">Province Impact</a>
+                <a href="#threat" class="mobile-link text-3xl font-black italic uppercase tracking-tighter hover:text-red-600">The Crisis</a>
+                <hr class="border-slate-100">
+                <a href="https://enstools.electionsnovascotia.ca/edinfo/" target="_blank" class="bg-blue-600 text-white p-6 rounded-2xl text-center text-xl font-black uppercase italic tracking-widest shadow-xl">
+                    Contact Your MLA
+                </a>
+                <div class="pt-12 text-slate-400 text-[10px] font-bold uppercase tracking-widest text-center">
+                    Protecting 80+ Branches Across NS
+                </div>
             </div>
         </div>
     </nav>
@@ -164,13 +208,13 @@
             <div class="grid lg:grid-cols-2 gap-20 items-center">
                 <div class="order-2 lg:order-1">
                     <div class="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold tracking-widest uppercase mb-6">
-                        Nova Scotia Public Library Advocacy
+                        Beyond The Books
                     </div>
                     <h3 class="text-5xl font-black italic uppercase tracking-tighter mb-8 leading-none">
-                        Essential to<br><span class="text-blue-600">Every Nova Scotian.</span>
+                        Libraries Are Essential to<br><span class="text-blue-600">Every Nova Scotian.</span>
                     </h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-8">
-                        Our provincial library system is more than a collection of buildings; it is a critical piece of social infrastructure. We provide free access to technology, health resources, career support, and safe community hubs for everyone from Sydney to Yarmouth.
+                        Our provincial library system is more than a collection of buildings; it is a critical piece of social infrastructure. They provide free access to technology, health resources, career support, and safe community hubs for everyone.
                     </p>
                     <div class="grid grid-cols-2 gap-6">
                         <div class="p-6 bg-white rounded-2xl shadow-sm border border-slate-200/50">
@@ -202,11 +246,11 @@
                 Nova Scotia's library funding is at a critical tipping point. These cuts threaten hours of operation, digital collections, and community outreach. Your voice can change the story.
             </p>
             <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <a href="#" class="bg-blue-600 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all transform hover:scale-105 shadow-xl">
-                    Contact Your Rep
+                <a href="https://enstools.electionsnovascotia.ca/edinfo/" class="bg-blue-600 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all transform hover:scale-105 shadow-xl">
+                    Contact Your MLA
                 </a>
-                <a href="https://nsla.ns.ca/" target="_blank" class="border border-white/30 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
-                    Learn More (NSLA)
+                <a href="#" target="_blank" class="border border-white/30 text-white px-12 py-5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
+                    Learn More
                 </a>
             </div>
         </div>
@@ -223,11 +267,11 @@
             <div class="flex flex-wrap justify-center gap-10 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
                 <a href="#" class="hover:text-black transition">Advocacy Kit</a>
                 <a href="#" class="hover:text-black transition">Impact Report</a>
-                <a href="#" class="hover:text-black transition">Find Your Branch</a>
-                <a href="#" class="hover:text-black transition">Contact MLA</a>
+                <a href="https://library.novascotia.ca/map" class="hover:text-black transition">Find Your Library</a>
+                <a href="https://enstools.electionsnovascotia.ca/edinfo/" class="hover:text-black transition">Contact MLA</a>
             </div>
             <p class="mt-12 text-[10px] text-slate-300 font-bold uppercase tracking-widest">
-                Art 115 Final Project • Nova Scotia Library Advocacy • 2026
+                Art 115 Final Project • avpxxd.ca • 2026
             </p>
         </div>
     </footer>
@@ -236,10 +280,46 @@
         const slides = document.querySelectorAll('.bg-slide');
         const dynamicWords = document.querySelectorAll('.dynamic-word');
         const progressBar = document.getElementById('progress-bar');
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const bar1 = document.getElementById('bar1');
+        const bar2 = document.getElementById('bar2');
+        const bar3 = document.getElementById('bar3');
         
         let current = 0;
         const total = slides.length;
         const interval = 4000;
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        let menuOpen = false;
+        function toggleMenu() {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.classList.remove('translate-x-full');
+                bar1.style.transform = 'translateY(6px) rotate(45deg)';
+                bar2.style.opacity = '0';
+                bar3.style.transform = 'translateY(-6px) rotate(-45deg)';
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+                bar1.style.transform = 'none';
+                bar2.style.opacity = '1';
+                bar3.style.transform = 'none';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
         function updateCarousel() {
             progressBar.style.transition = 'none';
